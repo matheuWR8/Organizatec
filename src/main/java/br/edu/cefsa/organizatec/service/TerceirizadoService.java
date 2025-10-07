@@ -3,21 +3,21 @@ package br.edu.cefsa.organizatec.service;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import br.edu.cefsa.organizatec.model.Terceirizado;
-import br.edu.cefsa.organizatec.repository.TerceirizadoRepository;
+import br.edu.cefsa.organizatec.dao.TerceirizadoDAO;
 
 @Service
 public class TerceirizadoService {
-    private final TerceirizadoRepository repository;
+    private final TerceirizadoDAO dao;
 
-    public TerceirizadoService(TerceirizadoRepository repository) {
-        this.repository = repository;
+    public TerceirizadoService(TerceirizadoDAO dao) {
+        this.dao = dao;
     }
 
-    public List<Terceirizado> listar() { return repository.findAll(); }
+    public List<Terceirizado> listar() { return dao.listar(); }
 
-    public Terceirizado salvar(Terceirizado f) { return repository.save(f); }
+    public void salvar(Terceirizado f) { dao.salvar(f); }
 
-    public void excluir(Integer id) { repository.deleteById(id); }
+    public void excluir(Integer id) { dao.excluir(id); }
 
-    public Terceirizado buscar(Integer id) { return repository.findById(id).orElse(null); }
+    public Terceirizado buscar(Integer id) { return dao.buscarPorId(id); }
 }

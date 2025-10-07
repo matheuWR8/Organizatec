@@ -3,21 +3,35 @@ package br.edu.cefsa.organizatec.service;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import br.edu.cefsa.organizatec.model.Funcionario;
-import br.edu.cefsa.organizatec.repository.FuncionarioRepository;
+import br.edu.cefsa.organizatec.dao.FuncionarioDAO;
 
 @Service
 public class FuncionarioService {
-    private final FuncionarioRepository repository;
 
-    public FuncionarioService(FuncionarioRepository repository) {
-        this.repository = repository;
+    private final FuncionarioDAO dao;
+
+    public FuncionarioService(FuncionarioDAO dao) {
+        this.dao = dao;
     }
 
-    public List<Funcionario> listar() { return repository.findAll(); }
+    public void salvar(Funcionario f) {
+        dao.salvar(f);
+    }
 
-    public Funcionario salvar(Funcionario f) { return repository.save(f); }
+    public Funcionario buscar(Integer id) {
+        return dao.buscarPorId(id);
+    }
 
-    public void excluir(Integer id) { repository.deleteById(id); }
+    public List<Funcionario> listar() {
+        return dao.listar();
+    }
 
-    public Funcionario buscar(Integer id) { return repository.findById(id).orElse(null); }
+    public void excluir(Integer id) {
+        dao.excluir(id);
+    }
+
+    public void atualizar(Funcionario f) {
+        dao.atualizar(f);
+    }
+
 }

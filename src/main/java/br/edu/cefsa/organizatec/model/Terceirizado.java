@@ -1,9 +1,7 @@
 package br.edu.cefsa.organizatec.model;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 
-@Entity
 public class Terceirizado extends Pessoa {
 
     private String funcao;
@@ -11,9 +9,7 @@ public class Terceirizado extends Pessoa {
     private LocalDate dataInicioContrato;
     private LocalDate dataFimContrato;
     private String responsavelInterno;
-
-    @ManyToOne
-    private Departamento departamento;
+    private Integer departamentoId;
 
     public String getFuncao() {
         return funcao;
@@ -55,12 +51,12 @@ public class Terceirizado extends Pessoa {
         this.responsavelInterno = responsavelInterno;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
+    public Integer getDepartamentoId() {
+        return departamentoId;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
+    public void setDepartamentoId(Integer departamentoId) {
+        this.departamentoId = departamentoId;
     }
 
     
