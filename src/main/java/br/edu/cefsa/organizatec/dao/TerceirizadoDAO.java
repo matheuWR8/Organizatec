@@ -51,8 +51,8 @@ public class TerceirizadoDAO {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """;
         return jdbc.update(sql, f.getNome(), f.getCpf(), f.getDataNascimento(),
-                f.getMatricula(), f.getCargo(), f.getSalarioBase(),
-                f.getDataContratacao(), f.getDepartamentoId());
+                f.getFuncao(), f.getEmpresaPrestadora(), f.getDataInicioContrato(),
+                f.getDataFimContrato(), f.getDepartamentoId());
     }
 
     public int atualizar(Terceirizado f) {
@@ -61,8 +61,8 @@ public class TerceirizadoDAO {
             cargo=?, salario_base=?, data_contratacao=?, departamento_id=? WHERE id=?
             """;
         return jdbc.update(sql, f.getNome(), f.getCpf(), f.getDataNascimento(),
-                f.getMatricula(), f.getCargo(), f.getSalarioBase(),
-                f.getDataContratacao(), f.getDepartamentoId(), f.getId());
+                f.getFuncao(), f.getEmpresaPrestadora(), f.getDataInicioContrato(),
+                f.getDataFimContrato(), f.getDepartamentoId(), f.getId());
     }
 
     public int excluir(Integer id) {
