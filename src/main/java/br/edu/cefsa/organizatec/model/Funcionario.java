@@ -2,6 +2,7 @@ package br.edu.cefsa.organizatec.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Set;
 
 @Entity
@@ -66,5 +67,4 @@ public class Funcionario extends Pessoa {
         this.projetos = projetos;
     }
 
-    
 }

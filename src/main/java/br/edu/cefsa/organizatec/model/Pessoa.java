@@ -2,6 +2,7 @@ package br.edu.cefsa.organizatec.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @MappedSuperclass
 public abstract class Pessoa {
@@ -46,4 +47,7 @@ public abstract class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
+    public int calcularIdade() {
+        return Period.between(this.dataNascimento, LocalDate.now()).getYears();
+    }
 }

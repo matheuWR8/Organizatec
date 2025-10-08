@@ -63,5 +63,27 @@ public class Visitante extends Pessoa {
         this.departamento = departamento;
     }
 
-    
+    public String registrarAtividades(String detalhe) {
+        // Implementação para Visitante: registra o motivo da visita.
+        return this.getNome() + " (Visitante) registrou o motivo da visita: " + this.motivo;
+    }
+
+    /**
+     * Registra a saída do visitante.
+     */
+    public String registrarSaida() {
+        if (this.dataSaida == null) {
+            this.dataEntrada = LocalDateTime.now();
+            return "Saída de " + this.getNome() + " registrada com sucesso às " + this.dataSaida.toLocalTime();
+        }
+        return this.getNome() + " já registrou a saída.";
+    }
+
+    /**
+     * Verifica se o visitante está atualmente na empresa.
+     */
+    public boolean estaNaEmpresa() {
+        return this.dataSaida == null;
+    }
+
 }
