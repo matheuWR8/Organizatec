@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lista de Funcionários</title>
+    </head>
+    <body>
+        <h2>Lista de Funcionários</h2>
+        <a href="/funcionarios/novo">Adicionar Funcionário</a>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Cargo</th>
+                    <th>Salário Base</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="f : ${funcionarios}">
+                    <td th:text="${f.id}"></td>
+                    <td th:text="${f.nome}"></td>
+                    <td th:text="${f.cpf}"></td>
+                    <td th:text="${f.cargo}"></td>
+                    <td th:text="${f.salarioBase}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/">Voltar</a>
+    </body>
+</html>
