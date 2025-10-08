@@ -1,31 +1,39 @@
--- ==============================
--- DADOS INICIAIS
--- ==============================
+-- DEPARTAMENTOS
+INSERT INTO departamento (nome) VALUES ('Recursos Humanos');
+INSERT INTO departamento (nome) VALUES ('Tecnologia da Informação');
+INSERT INTO departamento (nome) VALUES ('Financeiro');
+INSERT INTO departamento (nome) VALUES ('Segurança');
 
-INSERT INTO departamento (nome) VALUES 
-('Administração'),
-('Recursos Humanos'),
-('Tecnologia da Informação'),
-('Segurança'),
-('Limpeza');
+-- PROJETOS
+INSERT INTO projeto (nome, descricao) VALUES ('Sistema de Ponto', 'Desenvolvimento de sistema interno de registro de ponto.');
+INSERT INTO projeto (nome, descricao) VALUES ('Portal do Funcionário', 'Aplicação web para gestão de dados pessoais e folha de pagamento.');
 
-INSERT INTO projeto (nome, descricao) VALUES 
-('Sistema Interno', 'Desenvolvimento do sistema de gestão da empresa'),
-('Portal do Cliente', 'Portal web para acesso de clientes'),
-('Modernização da Infraestrutura', 'Atualização de servidores e redes');
+-- FUNCIONÁRIOS
+INSERT INTO funcionario (nome, cpf, data_nascimento, matricula, cargo, salario_base, data_contratacao, departamento_id)
+VALUES ('Carlos Almeida', '123.456.789-00', '1988-05-12', 'F001', 'Analista de Sistemas', 6500.00, '2022-01-10', 2);
 
-INSERT INTO funcionario 
-(nome, cpf, data_nascimento, matricula, cargo, salario_base, data_contratacao, departamento_id) VALUES
-('Ana Souza', '123.456.789-00', '1990-04-12', 'F001', 'Analista de Sistemas', 6500.00, '2021-03-10', 3),
-('Carlos Lima', '321.654.987-00', '1985-10-23', 'F002', 'Gerente de TI', 9000.00, '2020-08-05', 3),
-('Fernanda Rocha', '987.654.321-00', '1992-01-30', 'F003', 'Assistente Administrativo', 4000.00, '2022-06-15', 1);
+INSERT INTO funcionario (nome, cpf, data_nascimento, matricula, cargo, salario_base, data_contratacao, departamento_id)
+VALUES ('Mariana Souza', '987.654.321-00', '1992-09-03', 'F002', 'Assistente de RH', 4200.00, '2023-03-15', 1);
 
-INSERT INTO terceirizado 
-(nome, cpf, funcao, empresa_prestadora, data_inicio_contrato, data_fim_contrato, responsavel_interno, departamento_id) VALUES
-('José Pereira', '456.789.123-00', 'Segurança', 'SegurTec', '2023-01-10', '2024-12-31', 'Carlos Lima', 4),
-('Maria Antunes', '789.123.456-00', 'Limpeza', 'CleanService', '2022-02-15', '2025-02-14', 'Fernanda Rocha', 5);
+-- TERCEIRIZADOS
+INSERT INTO terceirizado (nome, cpf, funcao, empresa_prestadora, data_inicio_contrato, data_fim_contrato, responsavel_interno, departamento_id)
+VALUES ('João Pereira', '111.222.333-44', 'Vigilante', 'SegurTec', '2024-01-01', '2024-12-31', 'Carlos Almeida', 4);
 
-INSERT INTO visitante 
-(nome, documento, motivo, data_entrada, data_saida, funcionario_visitado, departamento_id) VALUES
-('Ricardo Alves', 'RG1234567', 'Reunião de parceria', CURRENT_TIMESTAMP, NULL, 'Carlos Lima', 3),
-('Luciana Mendes', 'RG7654321', 'Entrevista de emprego', CURRENT_TIMESTAMP, NULL, 'Fernanda Rocha', 2);
+-- VISITANTES
+INSERT INTO visitante (nome, documento, motivo, data_entrada, funcionario_visitado, departamento_id)
+VALUES ('Ana Ribeiro', 'RG1234567', 'Reunião de negócios', CURRENT_TIMESTAMP, 'Mariana Souza', 1);
+
+-- USUÁRIO PADRÃO (ROLE_RH)
+CREATE TABLE IF NOT EXISTS usuario (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    perfil VARCHAR(30) NOT NULL
+);
+
+INSERT INTO usuario (username, senha, perfil)
+VALUES (
+    'admin',
+    '$2a$10$Dow1pL7Sn0EZ8sKXjnygZuk4B9IAb9n8zM3MWyrKjKaOfZC3/Ez6a', -- BCrypt de 'admin123'
+    'RH'
+);

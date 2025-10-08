@@ -1,29 +1,21 @@
+DROP TABLE IF EXISTS funcionario_projeto;
 DROP TABLE IF EXISTS funcionario;
 DROP TABLE IF EXISTS terceirizado;
 DROP TABLE IF EXISTS visitante;
-DROP TABLE IF EXISTS departamento;
 DROP TABLE IF EXISTS projeto;
+DROP TABLE IF EXISTS departamento;
 
--- ==============================
--- TABELA: DEPARTAMENTO
--- ==============================
 CREATE TABLE departamento (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL
 );
 
--- ==============================
--- TABELA: PROJETO
--- ==============================
 CREATE TABLE projeto (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(255)
 );
 
--- ==============================
--- TABELA: FUNCIONARIO
--- ==============================
 CREATE TABLE funcionario (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -37,9 +29,14 @@ CREATE TABLE funcionario (
     FOREIGN KEY (departamento_id) REFERENCES departamento(id)
 );
 
--- ==============================
--- TABELA: TERCEIRIZADO
--- ==============================
+CREATE TABLE funcionario_projeto (
+    funcionario_id BIGINT NOT NULL,
+    projeto_id BIGINT NOT NULL,
+    PRIMARY KEY (funcionario_id, projeto_id),
+    FOREIGN KEY (funcionario_id) REFERENCES funcionario(id),
+    FOREIGN KEY (projeto_id) REFERENCES projeto(id)
+);
+
 CREATE TABLE terceirizado (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -53,9 +50,6 @@ CREATE TABLE terceirizado (
     FOREIGN KEY (departamento_id) REFERENCES departamento(id)
 );
 
--- ==============================
--- TABELA: VISITANTE
--- ==============================
 CREATE TABLE visitante (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,

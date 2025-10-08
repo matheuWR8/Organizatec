@@ -1,14 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Gestão de Pessoas</title>
-    </head>
-    <body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestão de Pessoas - Página Inicial</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <header>
         <h1>Gestão de Pessoas - Organizatec</h1>
-        <nav>
-            <a href="/funcionarios">Listar Funcionários</a> |
-            <a href="/funcionarios/novo">Novo Funcionário</a>
-        </nav>
-    </body>
+        <p>
+            Usuário: <span sec:authentication="name"></span> |
+            Perfil: <span sec:authentication="principal.authorities"></span>
+        </p>
+        <a th:href="@{/logout}">Sair</a>
+    </header>
+
+    <hr/>
+
+    <main>
+        <h2>Menu Principal</h2>
+
+        <ul>
+            <!-- VISÍVEL PARA RH -->
+            <li sec:authorize="hasRole('RH')">
+                <a th:href="@{/funcionarios}">Gestão de Funcionários</a>
+            </li>
+
+            <!-- VISÍVEL PARA RH e SEGURANÇA -->
+            <li sec:authorize="hasAnyRole('RH','SEGURANCA')">
+                <a th:href="@{/terceirizados}">Gestão de Terceirizados</a>
+            </li>
+
+            <!-- VISÍVEL PARA RH e RECEPÇÃO -->
+            <li sec:authorize="hasAnyRole('RH','RECEPCAO')">
+                <a th:href="@{/visitantes}">Controle de Visitantes</a>
+            </li>
+
+            <!-- ACESSÍVEL A TODOS OS PERFIS -->
+            <li>
+                <a th:href="@{/h2-console}" target="_blank">Console H2</a>
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+        <hr/>
+        <p>&copy; 2025 Organizatec - Sistema de Gestão de Pessoas</p>
+    </footer>
+</body>
 </html>

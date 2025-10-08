@@ -1,16 +1,21 @@
 package br.edu.cefsa.organizatec.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
 public class Funcionario extends Pessoa {
 
     private String matricula;
     private String cargo;
     private Double salarioBase;
     private LocalDate dataContratacao;
-    private Integer departamentoId;
 
+    @ManyToOne
+    private Departamento departamento;
+
+    @ManyToMany
     private Set<Projeto> projetos;
 
     public String getMatricula() {
@@ -45,6 +50,14 @@ public class Funcionario extends Pessoa {
         this.dataContratacao = dataContratacao;
     }
 
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
     public Set<Projeto> getProjetos() {
         return projetos;
     }
@@ -53,12 +66,5 @@ public class Funcionario extends Pessoa {
         this.projetos = projetos;
     }
 
-    public Integer getDepartamentoId() {
-        return departamentoId;
-    }
-
-    public void setDepartamentoId(Integer departamentoId) {
-        this.departamentoId = departamentoId;
-    }
-
+    
 }

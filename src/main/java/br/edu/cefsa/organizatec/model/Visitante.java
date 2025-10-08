@@ -1,7 +1,9 @@
 package br.edu.cefsa.organizatec.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
 public class Visitante extends Pessoa {
 
     private String documento;
@@ -10,6 +12,7 @@ public class Visitante extends Pessoa {
     private LocalDateTime dataSaida;
     private String funcionarioVisitado;
 
+    @ManyToOne
     private Departamento departamento;
 
     public String getDocumento() {
@@ -60,6 +63,5 @@ public class Visitante extends Pessoa {
         this.departamento = departamento;
     }
 
-    
     
 }

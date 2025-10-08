@@ -1,11 +1,15 @@
 package br.edu.cefsa.organizatec.model;
 
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
+@MappedSuperclass
 public abstract class Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;

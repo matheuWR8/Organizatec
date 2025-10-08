@@ -1,7 +1,12 @@
 package br.edu.cefsa.organizatec.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Departamento {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
 
@@ -21,6 +26,5 @@ public class Departamento {
         this.nome = nome;
     }
 
-    
     
 }

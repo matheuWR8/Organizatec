@@ -1,16 +1,20 @@
 package br.edu.cefsa.organizatec.model;
 
+import jakarta.persistence.*;
 import java.util.Set;
 
+@Entity
 public class Projeto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String descricao;
 
+    @ManyToMany(mappedBy = "projetos")
     private Set<Funcionario> funcionarios;
 
-    
     public Integer getId() {
         return id;
     }
@@ -42,5 +46,6 @@ public class Projeto {
     public void setFuncionarios(Set<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
+
     
 }
