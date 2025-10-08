@@ -12,8 +12,22 @@ public class Visitante extends Pessoa {
     private LocalDateTime dataSaida;
     private String funcionarioVisitado;
 
+    public Visitante(String documento, String motivo, LocalDateTime dataEntrada, LocalDateTime dataSaida, String funcionarioVisitado) {
+        this.documento = documento;
+        this.motivo = motivo;
+        this.dataEntrada = dataEntrada;
+        this.dataSaida = dataSaida;
+        this.funcionarioVisitado = funcionarioVisitado;
+        this.departamento = departamento;
+    }
+
+
     @ManyToOne
     private Departamento departamento;
+
+    public Visitante() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     public String getDocumento() {
         return documento;
